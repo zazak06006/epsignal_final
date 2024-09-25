@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nous Contactez</title>
+    <!-- Utilisez la balise {% load static %} pour gérer les fichiers statiques -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+</head>
+<body>
+    <!-- Main container -->
+    <div class="container">
+        <h1>Une question, Un renseignement ?</h1>
+        <p>Remplissez le formulaire pour nous contacter.</p>
+
+        <!-- Contact form section -->
+        <div class="contact-box">
+            <!-- Left side of the form -->
+            <div class="container-left">
+                <h3>Remplissez le formulaire</h3>
+                <!-- Form -->
+                <form id="contactForm" action="{% url 'contact' %}" method="POST"> <!-- Remplacez 'contact' par le nom de votre URL -->
+                    {% csrf_token %} <!-- Ajoutez la balise CSRF pour la sécurité -->
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Nom</label>
+                            <input type="text" id="name" name="name" placeholder="Entrer votre Nom" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Téléphone</label>
+                            <input type="text" id="phone" name="phone" placeholder="+33 1234567890" required>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" id="email" name="email" placeholder="youremail@gmail.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Sujet</label>
+                            <input type="text" id="subject" name="subject" placeholder="Entrer votre sujet">
+                        </div>
+                    </div>
+                    <label>Message</label>
+                    <textarea rows="10" id="message" name="message" placeholder="Entrer votre message" required></textarea>
+                    <button type="submit">ENVOYER LE MESSAGE</button>
+                </form>                
+            </div>
+            <!-- Right side with contact information -->
+            <div class="container-right">
+                <h3>Nous contactez</h3>
+                <!-- Table for contact information -->
+                <table>
+                    <tr>
+                        <td>Email:</td>
+                        <td>info@paris-epsi.fr</td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone:</td>
+                        <td>01 55 90 06 30</td>
+                    </tr>
+                    <tr>
+                        <td>Adresse:</td>
+                        <td>20 bis Jardins Boieldieu,<br>
+                            92800 Puteaux,<br>
+                            France</td>
+                    </tr>
+                </table>
+                
+                <!-- Map section -->
+                <div class="map">
+                    <!-- Google Map iframe -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.451862481448!2d2.2351799759089395!3d48.88772507133618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e665caee7aa6cb%3A0xa2669dbf6c1ea643!2sEPSI%20-%20Ecole%20d%E2%80%99ing%C3%A9nierie%20informatique%20-%20Paris!5e0!3m2!1sfr!2sfr!4v1727250457147!5m2!1sfr!2sfr" width="800" height="275" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript file -->
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

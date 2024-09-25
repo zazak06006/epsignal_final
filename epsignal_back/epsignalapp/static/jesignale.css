@@ -1,0 +1,97 @@
+body {
+    font-family: "Baloo 2", cursive;
+    margin: 0;
+    padding: 20px;
+    background-color: #0046ad; /* Couleur de l'arrière-plan */
+  }
+  
+  h1 {
+    text-align: center;
+    color: white; /* Couleur blanche pour le titre */
+    margin-bottom: 20px; /* Ajouter de l'espace sous le titre */
+  }
+  
+  .form-container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px; /* Coins arrondis du conteneur */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="datetime-local"]
+  select,
+  textarea {
+    border-radius: 5px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centrer le bouton */
+    margin-top: 15px;
+  }
+  
+  button {
+    background-color: orange; /* Couleur du bouton */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Coins arrondis du bouton améliorés */
+  }
+  
+  button:hover {
+    background-color: darkorange; /* Couleur au survol */
+  }
+  
+  button::after {
+    content: " ➡"; /* Flèche vers la droite */
+    font-size: 1.2em;
+    margin-left: 5px;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9em;
+  }
+  
+  .message-box {
+    display: none; /* Masqué par défaut */
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+  }
+  
+  .success {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  
+  .error-message {
+    background-color: #f2dede;
+    color: #a94442;
+  }
+  

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Infos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../static/epsilogo.png" alt="Epsi Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Infos utiles</a></li>
+                <li><a href="#">Je signale</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Contenu principal -->
+    <div class="container my-5">
+        <h1 class="mb-4">Liste des Infos</h1>
+        <div class="row">
+            {% for info in infos %}
+                <div class="col-md-12 mb-4"> <!-- Une carte par ligne -->
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ info.title }}</h5>
+                            <p class="card-text">{{ info.content }}</p> <!-- Afficher tout le contenu ici -->
+                            <small class="text-muted">{{ info.created_at|date:"d M Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Aucune information disponible.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

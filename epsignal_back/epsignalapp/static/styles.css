@@ -1,0 +1,264 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Baloo 2", cursive;
+  color: #333;
+  padding: 0; /* Assure qu'il n'y a pas de padding par défaut */
+  box-sizing: border-box; /* Assure que la largeur et la hauteur incluent le padding et la bordure */
+}
+
+h1,
+h2,
+h3,
+a {
+  font-family: "Baloo 2", cursive;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Navbar */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: white;
+}
+
+header .logo img {
+  max-width: 120px;
+}
+
+header nav ul {
+  display: flex;
+  justify-content: space-between; /* Répartit l'espace de manière égale entre les éléments */
+  width: 100%;
+  text-decoration: none;
+}
+
+header nav ul li a {
+  color: #333;
+  font-weight: 450;
+  padding: 10px 15px;
+  text-decoration: none;
+  margin-right: 80px;
+}
+
+
+header nav ul li:last-child {
+  margin-right: 0px;
+}
+
+/* Hero Section */
+.hero {
+  display: flex; /* Utilise flexbox pour aligner le contenu horizontalement */
+  justify-content: space-between; /* Espace entre le texte et l'image */
+  align-items: center; /* Centre verticalement les éléments */
+  padding: 20px; /* Ajoute du padding autour de la section */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+}
+
+/* Contenu du texte */
+.hero-content {
+  max-width: 50%; /* Limite la largeur du contenu à 50% */
+  padding-left: 80px; /* Ajoute de l'espace à droite pour éviter le contact avec l'image */
+}
+
+.hero-content h1 {
+  font-size: 2.5rem; /* Taille du titre */
+  margin-bottom: 10px; /* Espace en dessous du titre */
+}
+
+.hero-content p {
+  font-size: 1.2rem; /* Taille du paragraphe */
+  margin-bottom: 20px; /* Espace en dessous du paragraphe */
+}
+
+/* Styles des boutons */
+.buttons {
+  display: flex; /* Utilise flexbox pour aligner les boutons horizontalement */
+  gap: 20px; /* Espace entre les boutons */
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 20px; /* Padding pour les boutons */
+  border-radius: 5px; /* Bords arrondis pour les boutons */
+  text-decoration: none; /* Supprime le soulignement des liens */
+  font-size: 1rem; /* Taille de la police des boutons */
+  width: 150px; /* Largeur fixe pour que les boutons aient la même taille */
+  text-align: center; /* Centre le texte à l'intérieur du bouton */
+  cursor: pointer; /* Change le curseur au survol */
+}
+
+/* Bouton primaire (gauche) */
+.btn-primary {
+  background-color: #ff9d0b; /* Couleur de fond pour le bouton primaire */
+  color: #fff; /* Couleur du texte pour le bouton primaire (blanc) */
+}
+
+/* Bouton secondaire (droite) */
+.btn-secondary {
+  background-color: #fff; /* Couleur de fond pour le bouton secondaire (blanc) */
+  color: #ff9d0b; /* Couleur du texte pour le bouton secondaire (FF9D0B) */
+  border: 2px solid #ff9d0b; /* Bordure du bouton secondaire avec couleur FF9D0B */
+}
+
+/* Styles de l'image */
+.hero-image {
+  flex: 1; /* Permet à l'image de prendre l'espace restant */
+  text-align: right; /* Aligne l'image à droite */
+}
+
+.hero-image img {
+  max-width: 80%; /* S'assure que l'image ne déborde pas */
+  height: auto; /* Conserve le ratio d'aspect de l'image */
+}
+
+/* Mission Section */
+.mission {
+  display: flex; /* Utilise flexbox pour aligner le contenu horizontalement */
+  justify-content: space-between; /* Espace entre le contenu et l'image */
+  align-items: center; /* Centre verticalement les éléments */
+  padding: 60px 40px; /* Ajoute du padding autour de la section */
+  background-color: #0358c7; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+}
+
+.mission-content {
+  flex: 1; /* Permet au contenu de prendre l'espace restant */
+  max-width: 50%; /* Limite la largeur du contenu à 50% */
+}
+
+.mission-content h2 {
+  font-size: 2.5rem; /* Taille du titre */
+  margin-bottom: 10px; /* Espace en dessous du titre */
+}
+
+.mission-content p {
+  font-size: 1.2rem; /* Taille du paragraphe */
+  margin-bottom: 20px; /* Espace en dessous du paragraphe */
+}
+
+/* Styles de l'image */
+.mission-image {
+  flex: 1; /* Permet à l'image de prendre l'espace restant */
+  display: flex; /* Utilise flexbox pour centrer l'image */
+  justify-content: center; /* Centre horizontalement l'image */
+  align-items: center; /* Centre verticalement l'image */
+}
+
+.mission-image img {
+  width: 400px; /* Largeur de l'image */
+  height: 400px; /* Hauteur de l'image (égale à la largeur pour un cercle parfait) */
+  object-fit: cover; /* Recadre l'image sans déformation */
+  border-radius: 50%; /* Transforme l'image en cercle parfait */
+  overflow: hidden; /* Cache tout débordement */
+}
+
+/* FAQ Section */
+.faq {
+  padding: 60px 100px;
+}
+
+.faq h2 {
+  margin-bottom: 20px;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-answer {
+  display: none;
+  padding: 10px;
+  background-color: #f4f4f4;
+}
+
+/* Join Us Section */
+.join-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 100px;
+}
+
+.join-content {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.join-content h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.join-content p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.join-content a {
+  color: orange;
+  font-weight: bold;
+}
+
+.join-image img {
+  max-width: 50%;
+  border-radius: 50%;
+}
+
+/* Footer */
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  background-color: #0046ad;
+  color: white;
+}
+
+footer h3,
+footer h4 {
+  margin-bottom: 10px;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  margin-bottom: 5px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer-newsletter input[type="email"] {
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.footer-newsletter button {
+  padding: 10px 20px;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}

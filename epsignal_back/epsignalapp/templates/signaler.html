@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signaler un Problème</title>
+    <!-- Static file handling in Django -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'jesignale.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Signaler un Problème</h1> <!-- Titre en dehors du cadre du formulaire -->
+    
+    <div class="form-container">
+        <!-- Problem report form section -->
+        <form id="reportForm" action="{% url 'signaler' %}" method="POST">
+            {% csrf_token %} <!-- CSRF token for security -->
+
+            <!-- Type de Problème -->
+            <label for="problem_type">Type de Problème</label>
+            <select id="problem_type" name="problem_type" required>
+                <option value="">Sélectionnez un type</option>
+                <option value="technique">Problème Technique</option>
+                <option value="physique">Problème Physique</option>
+            </select>
+
+            <!-- Nom et Prénom -->
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" placeholder="Entrer votre Nom" required>
+                    <div id="nameError" class="error"></div>
+                </div>
+                <div style="width: 48%;">
+                    <label for="firstname">Prénom</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="Entrer votre Prénom" required>
+                    <div id="firstnameError" class="error"></div>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="youremail@gmail.com" required>
+            <div id="emailError" class="error"></div>
+
+            <!-- Date et Heure de l'incident -->
+            <label for="incident_date">Date et Heure de l'incident</label>
+            <input type="datetime-local" id="incident_date" name="incident_date" required>
+
+            <!-- Décrivez le Problème -->
+            <label for="description">Décrivez le Problème</label>
+            <textarea rows="5" id="description" name="description" placeholder="Décrivez le problème rencontré" required></textarea>
+
+            <!-- Button container -->
+            <div class="button-container">
+                <button type="submit">SIGNALER LE PROBLÈME</button>
+            </div>
+        </form>
+
+        <div id="messageBox" class="message-box"></div> <!-- Boîte de message -->
+    </div>
+
+    <!-- JS file -->
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>
