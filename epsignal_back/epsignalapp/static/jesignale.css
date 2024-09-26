@@ -1,8 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
     font-family: "Baloo 2", cursive;
     margin: 0;
     padding: 20px;
-    background-color: #0046ad; /* Couleur de l'arrière-plan */
+    background-color: #061e32; /* Couleur de l'arrière-plan */
   }
   
   h1 {
@@ -93,5 +99,10 @@ body {
   .error-message {
     background-color: #f2dede;
     color: #a94442;
+  }
+
+  footer ul li a {
+    text-decoration: none;
+    color: white;
   }
   

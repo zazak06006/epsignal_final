@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +131,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'epsib32024@gmail.com' 
 EMAIL_HOST_PASSWORD = 'qflr cxqv enls xljn '
+
+# Configuration d'e-mail (exemple avec Gmail)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ton_email@gmail.com'  # Remplace par ton email
+EMAIL_HOST_PASSWORD = 'ton_mot_de_passe'  # Remplace par ton mot de passe
+DEFAULT_FROM_EMAIL = 'ton_email@gmail.com'
+ADMIN_EMAIL = 'epsib32024@gmail.com'  # Adresse de réception des emails de signalement

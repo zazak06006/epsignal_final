@@ -3,16 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nous Contactez</title>
+    <title>Nous Contacter</title>
     <!-- Utilisez la balise {% load static %} pour gérer les fichiers statiques -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Style pour le modal */
+        .modal {
+            display: none; /* Masquer par défaut */
+            position: fixed; /* Rester en position fixe */
+            z-index: 1000; /* S'assurer qu'il est au-dessus d'autres éléments */
+            left: 0;
+            top: 0;
+            width: 100%; /* Plein écran */
+            height: 100%; /* Plein écran */
+            overflow: auto; /* Activer le défilement si nécessaire */
+            background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+        }
+        .modal-content {
+            background-color: #fefefe; /* Couleur de fond du modal */
+            margin: 15% auto; /* Marges pour centrer */
+            padding: 20px; /* Espacement interne */
+            border: 1px solid #4caf50; /* Bordure verte */
+            width: 300px; /* Largeur fixe */
+            border-radius: 8px; /* Coins arrondis */
+            text-align: center; /* Centrer le texte */
+        }
+
+        .modal-content p {
+            color: black; /* Changer la couleur du texte en noir */
+        }
+
+        .close {
+            color: #aaa; /* Couleur de fermeture */
+            float: right; /* Aligner à droite */
+            font-size: 28px; /* Taille du texte */
+            font-weight: bold; /* Gras */
+        }
+        .close:hover,
+        .close:focus {
+            color: black; /* Changer la couleur au survol */
+            text-decoration: none; /* Pas de soulignement */
+            cursor: pointer; /* Curseur pointer */
+        }
+    </style>
+        <script>
+        function showMessage() {
+            // Afficher le modal
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'block'; // Affiche le modal
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none'; // Masquer le modal
+        }
+
+        // Fermer le modal si l'utilisateur clique en dehors de la zone de contenu
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
+
+    <header>
+        <div class="logo">
+            <img src="../static/epsilogo.png" alt="Epsi Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Infos utiles</a></li>
+                <li><a href="{% url 'signaler' %}">Je signale</a></li>
+                <li><a href="{% url 'contact' %}" style="color: #ff9d0b;">Contactez-nous</a></li>
+            </ul>
+        </nav>
+    </header>
+    
     <!-- Main container -->
     <div class="container">
         <h1>Une question, Un renseignement ?</h1>
         <p>Remplissez le formulaire pour nous contacter.</p>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p>Votre message a bien été envoyé avec succès !</p>
+            </div>
+        </div>
 
         <!-- Contact form section -->
         <div class="contact-box">
@@ -20,16 +106,16 @@
             <div class="container-left">
                 <h3>Remplissez le formulaire</h3>
                 <!-- Form -->
-                <form id="contactForm" action="{% url 'contact' %}" method="POST"> <!-- Remplacez 'contact' par le nom de votre URL -->
-                    {% csrf_token %} <!-- Ajoutez la balise CSRF pour la sécurité -->
+                <form id="contactForm" action="{% url 'contact' %}" method="POST" onsubmit="event.preventDefault(); this.submit(); showMessage();">
+                    {% csrf_token %}
                     <div class="input-row">
                         <div class="input-group">
                             <label>Nom</label>
                             <input type="text" id="name" name="name" placeholder="Entrer votre Nom" required>
                         </div>
                         <div class="input-group">
-                            <label>Téléphone</label>
-                            <input type="text" id="phone" name="phone" placeholder="+33 1234567890" required>
+                            <label>Prénom</label>
+                            <input type="text" id="surname" name="surname" placeholder="Entrer votre Prénom" required>
                         </div>
                     </div>
                     <div class="input-row">
@@ -45,7 +131,7 @@
                     <label>Message</label>
                     <textarea rows="10" id="message" name="message" placeholder="Entrer votre message" required></textarea>
                     <button type="submit">ENVOYER LE MESSAGE</button>
-                </form>                
+                </form>
             </div>
             <!-- Right side with contact information -->
             <div class="container-right">
@@ -76,7 +162,31 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-newsletter">
+            <h3>Recevoir de nos nouvelles</h3>
+            <input type="email" placeholder="Votre email">
+            <button>S'abonner</button>
+        </div>
+        <div class="footer-contact">
+            <h4>Contact info</h4>
+            <ul>
+                <li>20 bis Jardins Boieldieu, 92800 Puteaux</li>
+                <li>01 55 90 06 30</li>
+                <li>info@epsi.fr</li>
+                <li><a href="{% url 'index' %}"><img src="../static/epsilogo.png" style="max-height: 20px"></a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Liens</h4>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Info Utiles</a></li>
+                <li><a href="{% url 'signaler' %}">Signaler un problème</a></li>
+                <li><a href="{% url 'contact' %}">Contacter</a></li>
+            </ul>
+        </div>
+    </footer>
     <!-- JavaScript file -->
-    <script src="{% static 'assets/js/script.js' %}"></script>
-</body>
-</html>
+    <script src="{% static 'assets/js/script.js'

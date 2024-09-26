@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPSIgnal</title>
     <!-- Google Font -->
-    <link rel="stylesheet" href="../static/styles.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles.css">
 </head>
 
 </head>
@@ -20,9 +20,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Infos utiles</a></li>
-                <li><a href="#">Je signale</a></li>
+                <li><a href="{% url 'index' %}" style="color: #ff9d0b;">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Infos utiles</a></li>
+                <li><a href="{% url 'signaler' %}">Je signale</a></li>
+                <li><a href="{% url 'contact' %}" class="btn-primary">Contactez-nous</a></li>
             </ul>
         </nav>
     </header>
@@ -30,11 +31,11 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Bienvenu sur Epsignal</h1>
+            <h1>Bienvenue sur Epsignal</h1>
             <p>Ce site vous permet de signaler tout problème au sein de votre campus à Paris et de vous informer sur l'EPSI.</p>
             <div class="buttons">
-                <a href="#" class="btn-primary">Infos</a>
-                <a href="#" class="btn-secondary">Signaler</a>
+                <a href="infos" class="btn-primary">Infos</a>
+                <a href="signaler" class="btn-secondary">Signaler</a>
             </div>
         </div>
         <div class="hero-image">
@@ -50,6 +51,7 @@
         <div class="mission-content">
             <h2>Restez informé de toutes les nouvelles grâce à Infos Utiles.</h2>
             <p>Vous y trouverez toutes les informations concernant l'EPSI et le campus de Paris.</p>
+            <a href="{% url 'info_list' %}" class="btn-primary">Infos Utiles</a>
         </div>
     </section>
 
@@ -60,13 +62,13 @@
             <!-- FAQ 1 -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="faqHeadingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
-                        qu'est ce qu'un signalement technique ?
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="false" aria-controls="faqCollapseOne">
+                        Qu'est-ce que Epsignal ?
                     </button>
                 </h2>
-                <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                <div id="faqCollapseOne" class="accordion-collapse collapse" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        qu'est ce qu'un signalement physique ?
+                        Epsignal est une plateforme dédiée aux étudiants de l'EPSI Paris. Elle permet de signaler tout problème ou incident sur le campus, comme des problèmes techniques, des incidents de sécurité, ou des besoins de maintenance. Elle fournit également des informations utiles sur l'école et la vie étudiante.
                     </div>
                 </div>
             </div>
@@ -75,12 +77,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="faqHeadingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
-                        Comment faire des dons ?
+                        Comment signaler un problème sur le campus ?
                     </button>
                 </h2>
                 <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Vous pouvez faire des dons en contactant notre association par téléphone ou via notre site web dans la section des dons.
+                        Pour signaler un problème, cliquez sur l'onglet "Je signale" dans le menu de navigation. Remplissez le formulaire avec les détails du problème, y compris votre nom, votre email (facultatif pour un signalement anonyme), et une description précise de l'incident.
                     </div>
                 </div>
             </div>
@@ -89,12 +91,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="faqHeadingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
-                        Quels sont nos objectifs ?
+                        Comment contacter l'administration si j'ai des questions supplémentaires ?
                     </button>
                 </h2>
                 <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Nos objectifs sont d'aider les démunis, d'améliorer l'accès à l'éducation, et de soutenir les communautés locales dans des situations difficiles.
+                        Vous pouvez nous contacter via la section "Contactez-nous" du site. Remplissez le formulaire de contact avec vos questions ou préoccupations, et nous vous répondrons dans les plus brefs délais. Vous pouvez également appeler les numéros fournis pour une assistance rapide.
                     </div>
                 </div>
             </div>
@@ -103,27 +105,30 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="faqHeadingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
-                        Où nous trouver ?
+                        Est-il possible de consulter les signalements déjà faits par d'autres étudiants ?
                     </button>
                 </h2>
                 <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Nous sommes situés à Bejaia, en Algérie. Vous pouvez également nous suivre sur nos réseaux sociaux pour des informations en temps réel.
+                        Les signalements individuels sont confidentiels. Toutefois, certains incidents majeurs ou qui concernent la communauté seront affichés dans la section "Infos Utiles".
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Join Us Section -->
-    <section class="join-section">
-        <div class="join-content">
-            <h2>Rejoins-nous et devenez adhérent</h2>
-            <p>Plus de 30 personnes nous ont déjà rejoints...</p>
-            <a href="#">Signaler un problème</a>
+
+
+    <section class="mission">
+        <div class="signal-content">
+            <h2>Aidez-nous à résoudre les problèmes liés à votre campus</h2>
+            <p>Plus de 30 personnes nous ont déjà signalé des problèmes...</p>
+            <a href="{% url 'signaler' %}" class="btn-primary">Signaler un problème</a>
         </div>
-        <div class="join-image">
-            <img src="EPSiparis.jpg" alt="Join Us Image">
+        <div class="mission-image">
+            <img src="../static/img.png" >
         </div>
+
     </section>
 
     <!-- Footer -->
@@ -136,19 +141,19 @@
         <div class="footer-contact">
             <h4>Contact info</h4>
             <ul>
-                <li>Tala Merkha, Bejaia</li>
-                <li>034 10 46 31</li>
-                <li>basmatkheir.bejaia@gmail.com</li>
-                <li><a href="#">Basmet kheir</a></li>
+                <li>20 bis Jardins Boieldieu, 92800 Puteaux</li>
+                <li>01 55 90 06 30</li>
+                <li>info@epsi.fr</li>
+                <li><a href="{% url 'index' %}"><img src="../static/epsilogo.png" style="max-height: 20px"></a></li>
             </ul>
         </div>
         <div class="footer-links">
             <h4>Liens</h4>
             <ul>
-                <li><a href="#">Evénements</a></li>
-                <li><a href="#">Devenir adhérent</a></li>
-                <li><a href="#">Nous contacter</a></li>
-                <li><a href="#">À propos de nous</a></li>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Info Utiles</a></li>
+                <li><a href="{% url 'signaler' %}"">Signaler un problèmer</a></li>
+                <li><a href="{% url 'contact' %}">Contacter</a></li>
             </ul>
         </div>
     </footer>

@@ -5,45 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Infos</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../static/styles.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/infos.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <style>
+        .card {
+            display: flex; /* Utiliser Flexbox pour le contenu de la carte */
+            flex-direction: column; /* Orientation verticale */
+            height: 100%; /* Hauteur de 100% pour toutes les cartes */
+            transition: transform 0.2s; /* Effet de transition */
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Effet de zoom au survol */
+        }
+
+        .card-title {
+            font-size: 1.25rem; /* Taille de la police */
+            margin-bottom: 10px; /* Marge en bas */
+            color: #333; /* Couleur du texte */
+        }
+
+        .card-text {
+            flex-grow: 1; /* Permet au texte de remplir l'espace disponible */
+            margin-bottom: 10px; /* Marge en bas */
+            color: #555; /* Couleur du texte */
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="../static/epsilogo.png" alt="Epsi Logo">
+            <img src="../static/epsilogo.png" alt="Epsi Logo" style="max-width: 180px;">
         </div>
         <nav>
             <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Infos utiles</a></li>
-                <li><a href="#">Je signale</a></li>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}" style="color: #ff9d0b;">Infos utiles</a></li>
+                <li><a href="{% url 'signaler' %}">Je signale</a></li>
+                <li><a href="{% url 'contact' %}" class="btn-primary">Contactez-nous</a></li>
             </ul>
         </nav>
     </header>
+
     <!-- Contenu principal -->
     <div class="container my-5">
-        <h1 class="mb-4">Liste des Infos</h1>
+        <h1 class="mb-4 text-center">Liste des Infos</h1> <!-- Titre centré -->
         <div class="row">
             {% for info in infos %}
-                <div class="col-md-12 mb-4"> <!-- Une carte par ligne -->
-                    <div class="card shadow-sm">
+                <div class="col-md-4 mb-4"> <!-- Trois cartes par ligne -->
+                    <div class="card shadow border-light rounded"> <!-- Ajout de bordure légère et coins arrondis -->
                         <div class="card-body">
-                            <h5 class="card-title">{{ info.title }}</h5>
+                            <h5 class="card-title text-highlight">{{ info.title }}</h5> <!-- Titre stylisé -->
                             <p class="card-text">{{ info.content }}</p> <!-- Afficher tout le contenu ici -->
                             <small class="text-muted">{{ info.created_at|date:"d M Y" }}</small>
                         </div>
                     </div>
                 </div>
             {% empty %}
-                <p>Aucune information disponible.</p>
+                <div class="col-12">
+                    <div class="alert alert-warning text-center" role="alert">Aucune information disponible.</div> <!-- Message d'alerte stylisé -->
+                </div>
             {% endfor %}
         </div>
     </div>
+    
+    <style>
+        .card {
+            transition: transform 0.3s; /* Transition pour l'effet de survol */
+            border: 1px solid #e0e0e0; /* Bordure légère pour un look soigné */
+        }
+    
+        .card:hover {
+            transform: translateY(-5px); /* Effet de levée au survol */
+        }
+    
+        .text-highlight {
+            color: #ff9d0b; /* Couleur personnalisée pour le titre */
+        }
+    
+        .btn-outline-primary {
+            border-color: #007bff; /* Bordure du bouton */
+            color: #007bff; /* Couleur du texte du bouton */
+            transition: background-color 0.3s, color 0.3s; /* Transition pour le bouton */
+        }
+    
+        .btn-outline-primary:hover {
+            background-color: #007bff; /* Couleur de fond au survol */
+            color: white; /* Couleur du texte au survol */
+        }
+    
+        .alert {
+            font-size: 1.2rem; /* Taille du texte de l'alerte */
+        }
+    </style>
+    
+    
 
-    <!-- Scripts JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <footer>
+        <div class="footer-newsletter">
+            <h3>Recevoir de nos nouvelles</h3>
+            <input type="email" placeholder="Votre email">
+            <button>S'abonner</button>
+        </div>
+        <div class="footer-contact">
+            <h4>Contact info</h4>
+            <ul>
+                <li>20 bis Jardins Boieldieu, 92800 Puteaux</li>
+                <li>01 55 90 06 30</li>
+                <li>info@epsi.fr</li>
+                <li><a href="{% url 'index' %}"><img src="../static/epsilogo.png" style="max-width: 150px"></a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Liens</h4>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Info Utiles</a></li>
+                <li><a href="{% url 'signaler' %}">Signaler un problème</a></li>
+                <li><a href="{% url 'contact' %}">Contacter</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 </html>

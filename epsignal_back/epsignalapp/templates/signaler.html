@@ -5,16 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signaler un Problème</title>
     <!-- Static file handling in Django -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'jesignale.css' %}">
+    <link rel="stylesheet" href="../static/jesignale.css">
+    <link rel="stylesheet" href="../static/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Style pour le modal */
+        .modal {
+            display: none; /* Masquer par défaut */
+            position: fixed; /* Rester en position fixe */
+            z-index: 1000; /* S'assurer qu'il est au-dessus d'autres éléments */
+            left: 0;
+            top: 0;
+            width: 100%; /* Plein écran */
+            height: 100%; /* Plein écran */
+            overflow: auto; /* Activer le défilement si nécessaire */
+            background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+        }
+        .modal-content {
+            background-color: #fefefe; /* Couleur de fond du modal */
+            margin: 15% auto; /* Marges pour centrer */
+            padding: 20px; /* Espacement interne */
+            border: 1px solid #4caf50; /* Bordure verte */
+            width: 300px; /* Largeur fixe */
+            border-radius: 8px; /* Coins arrondis */
+            text-align: center; /* Centrer le texte */
+        }
+        .close {
+            color: #aaa; /* Couleur de fermeture */
+            float: right; /* Aligner à droite */
+            font-size: 28px; /* Taille du texte */
+            font-weight: bold; /* Gras */
+        }
+        .close:hover,
+        .close:focus {
+            color: black; /* Changer la couleur au survol */
+            text-decoration: none; /* Pas de soulignement */
+            cursor: pointer; /* Curseur pointer */
+        }
+    </style>
+    <script>
+        function showMessage() {
+            // Afficher le modal
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'block'; // Affiche le modal
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none'; // Masquer le modal
+        }
+
+        // Fermer le modal si l'utilisateur clique en dehors de la zone de contenu
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
-    <h1>Signaler un Problème</h1> <!-- Titre en dehors du cadre du formulaire -->
+
+    <header>
+        <div class="logo">
+            <img src="../static/epsilogo.png" alt="Epsi Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Infos utiles</a></li>
+                <li><a href="{% url 'signaler' %}" style="color: #ff9d0b;">Je signale</a></li>
+                <li><a href="{% url 'contact' %}" class="btn-primary">Contactez-nous</a></li>
+            </ul>
+        </nav>
+    </header>
     
+    <h1>Signaler un Problème</h1> <!-- Titre en dehors du cadre du formulaire -->
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Votre message a bien été envoyé avec succès !</p>
+        </div>
+    </div>
+
     <div class="form-container">
         <!-- Problem report form section -->
-        <form id="reportForm" action="{% url 'signaler' %}" method="POST">
+        <form id="reportForm" action="{% url 'signaler' %}" method="POST" onsubmit="event.preventDefault(); this.submit(); showMessage();">
             {% csrf_token %} <!-- CSRF token for security -->
 
             <!-- Type de Problème -->
@@ -22,31 +100,16 @@
             <select id="problem_type" name="problem_type" required>
                 <option value="">Sélectionnez un type</option>
                 <option value="technique">Problème Technique</option>
-                <option value="physique">Problème Physique</option>
+                <option value="physique">Problème Morale</option>
+                <option value="autres">Autres ..</option>
             </select>
 
-            <!-- Nom et Prénom -->
-            <div style="display: flex; justify-content: space-between;">
-                <div style="width: 48%;">
-                    <label for="name">Nom</label>
-                    <input type="text" id="name" name="name" placeholder="Entrer votre Nom" required>
-                    <div id="nameError" class="error"></div>
-                </div>
-                <div style="width: 48%;">
-                    <label for="firstname">Prénom</label>
-                    <input type="text" id="firstname" name="firstname" placeholder="Entrer votre Prénom" required>
-                    <div id="firstnameError" class="error"></div>
-                </div>
-            </div>
-
+            
             <!-- Email -->
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="youremail@gmail.com" required>
             <div id="emailError" class="error"></div>
 
-            <!-- Date et Heure de l'incident -->
-            <label for="incident_date">Date et Heure de l'incident</label>
-            <input type="datetime-local" id="incident_date" name="incident_date" required>
 
             <!-- Décrivez le Problème -->
             <label for="description">Décrivez le Problème</label>
@@ -57,11 +120,33 @@
                 <button type="submit">SIGNALER LE PROBLÈME</button>
             </div>
         </form>
-
-        <div id="messageBox" class="message-box"></div> <!-- Boîte de message -->
     </div>
 
-    <!-- JS file -->
-    <script src="{% static 'assets/js/script.js' %}"></script>
+    <footer>
+        <div class="footer-newsletter">
+            <h3>Recevoir de nos nouvelles</h3>
+            <input type="email" placeholder="Votre email">
+            <button>S'abonner</button>
+        </div>
+        <div class="footer-contact">
+            <h4>Contact info</h4>
+            <ul>
+                <li>20 bis Jardins Boieldieu, 92800 Puteaux</li>
+                <li>01 55 90 06 30</li>
+                <li>info@epsi.fr</li>
+                <li><a href="{% url 'index' %}"><img src="../static/epsilogo.png" style="max-height: 20px"></a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Liens</h4>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'info_list' %}">Info Utiles</a></li>
+                <li><a href="{% url 'signaler' %}">Signaler un problème</a></li>
+                <li><a href="{% url 'contact' %}">Contacter</a></li>
+            </ul>
+        </div>
+    </footer>
+
 </body>
 </html>

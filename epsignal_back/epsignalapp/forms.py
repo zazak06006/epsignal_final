@@ -1,15 +1,16 @@
 from django import forms
-from .models import Contact , Problem
+from .models import Contact , Problem , Newsletter
+from django import forms
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ['name', 'phone', 'email', 'subject', 'message']
+        fields = ['name', 'surname', 'email', 'subject', 'message']
 
 class ProblemReportForm(forms.ModelForm):
     class Meta:
         model = Problem
-        fields = ['problem_type', 'name', 'firstname', 'email', 'incident_date', 'description']
+        fields = ['problem_type','email', 'description']
 
         # Customizing widgets for the fields
         widgets = {
@@ -45,14 +46,8 @@ class ProblemReportForm(forms.ModelForm):
             })
         }
 
-    def clean_name(self):
-        name = self.cleaned_data.get('name')
-        if any(char.isdigit() for char in name):
-            raise forms.ValidationError("Le nom ne doit pas contenir de chiffres.")
-        return name
+class NewsletterForm(forms.ModelForm):
+    class Meta:
+        model =Newsletter
+        fields = ['email']
 
-    def clean_firstname(self):
-        firstname = self.cleaned_data.get('firstname')
-        if any(char.isdigit() for char in firstname):
-            raise forms.ValidationError("Le prénom ne doit pas contenir de chiffres.")
-        return firstname

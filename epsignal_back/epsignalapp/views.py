@@ -1,10 +1,17 @@
-from django.shortcuts import redirect, render
-from .models import Info , Contact , Problem
-from .forms import ContactForm , ProblemReportForm
-from django.contrib.messages import constants as messages
-
+from django.shortcuts import redirect, render 
+from .models import Info , Contact , Problem , Newsletter
+from .forms import ContactForm , ProblemReportForm , NewsletterForm
+from django.contrib import messages
+from datetime import datetime
+from django.utils import timezone
 
 def index(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            messages.success(request, 'Votre action a été réalisée avec succès.')
+        form = ContactForm()
     return render(request, 'acceuil.html')
 
 def info_list(request):
@@ -16,37 +23,39 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save() 
-            #Envoie mail contact
             send_email_contact(
             request.POST.get('name'),
-            request.POST.get('phone'),
+            request.POST.get('surname'),
             request.POST.get('email'),
             request.POST.get('subject'),
             request.POST.get('message'),
             )
-
-            return redirect('index') 
+            form.save() 
+            messages.success(request, 'Votre action a été réalisée avec succès.')
+        return redirect('index')
         form = ContactForm()
 
     return render(request, 'Contact.html')
 
 
 def signaler_view(request):
+
     if request.method == 'POST':
+
+        print(request.POST)
         form = ProblemReportForm(request.POST)
         if form.is_valid():
-            #Envoie mail signaler
+            print("okkkkkkkkkkkkk")
             send_email(
                 request.POST.get('problem_type'), 
-                request.POST.get('name'),
-                request.POST.get('firstname'),
                 request.POST.get('email'),
-                request.POST.get('incident_date'),
                 request.POST.get('description'),
                 )
-            form.save()  # Save the form data to the database
-            return redirect('index')  # Redirect to a 'home' page or any other page after successful submissio
+            messages.success(request, "Votre action a été réalisée avec succès.")
+            form.save() # Save the form data to the database
+            return redirect('index')
+        else:
+            print("erreruerrr")  # Redirect to a 'home' page or any other page after successful submissio
         form = ProblemReportForm()
     
     return render(request, 'signaler.html')
@@ -56,7 +65,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_email(problem_type, name, firstname, email, date_time, message):
+def send_email(problem_type,email, message):
     # Déterminez l'email du destinataire en fonction du type de problème
     if problem_type == "technique":
         recipient_email = "technicien.epsi2024@gmail.com"
@@ -70,10 +79,7 @@ def send_email(problem_type, name, firstname, email, date_time, message):
     subject = f"Signalement de problème : {problem_type.capitalize()}"
     body = f"""
     Type de problème : {problem_type}
-    Nom : {name}
-    Prénom : {firstname}
     Email : {email}
-    Date de et heure de l'incident : {date_time}
     Description : {message}
     """
 
